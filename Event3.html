@@ -53,40 +53,20 @@
 
 <script type="text/javascript">
 
-    function isAndroidBridgeAvailable() {
-    var result = false;
-    if (window.adbrixBridge) {
-        result = true;
-    }
-    if (!result) {
-        console.log("No Android APIs found.");
-    }
-    return result;
-    }
-
-    function signUp() {
-    const param = {
-        method_name: AdbrixMethodName.signUp,
-        sign_channel: AdbrixSignUpChannel.Google,  // number
-        extra_attr: {
-            user_id: "user_id",
-            age: 14  // number
+    function isIosBridgeAvailable() {
+        var result = false;
+        if (window.webkit
+            && window.webkit.messageHandlers
+            && window.webkit.messageHandlers.adbrixBridge) {
+            result = true;
         }
+        if (!result) {
+            console.log("No iOS APIs found.");
+        }
+        return result;
     }
-    adbrix.common.signUp('Google', {
-        user_id: "user_id",
-        age: 14  // number
-     });
-    if (isAndroidBridgeAvailable()) {
-        adbrixBridge.invoke(JSON.stringify(param));
-    }
-    if (isIosBridgeAvailable()) {
-        window.webkit.messageHandlers.adbrixBridge.postMessage(param);
-    }
-}
-        
       </script>
-
+    
 </head>
 <body>
     <h1>Common API</h1> <!-- 2. 버튼 위에 제목을 추가 -->

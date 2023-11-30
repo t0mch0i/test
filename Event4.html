@@ -72,6 +72,23 @@
 
   </script>
 
+<script type="text/javascript">
+
+    function isIosBridgeAvailable() {
+        var result = false;
+        if (window.webkit
+            && window.webkit.messageHandlers
+            && window.webkit.messageHandlers.adbrixBridge) {
+            result = true;
+        }
+        if (!result) {
+            console.log("No iOS APIs found.");
+        }
+        return result;
+    }
+      </script>
+    
+
 </head>
 <body>
     <h1>Commerce Event</h1> <!-- 2. 버튼 위에 제목을 추가 -->

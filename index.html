@@ -28,6 +28,23 @@
         },
         });
     </script>
+
+<script type="text/javascript">
+
+    function isIosBridgeAvailable() {
+        var result = false;
+        if (window.webkit
+            && window.webkit.messageHandlers
+            && window.webkit.messageHandlers.adbrixBridge) {
+            result = true;
+        }
+        if (!result) {
+            console.log("No iOS APIs found.");
+        }
+        return result;
+    }
+      </script>
+    
 </head>
 <body>
     <h1>WebSDK_Test_2</h1>
