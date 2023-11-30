@@ -1,0 +1,188 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commerce Event</title>
+    <style>
+        /* 전체 페이지 스타일링 */
+        body {
+            display: flex;
+            flex-direction: column; /* 추가: 컨테이너의 아이템들을 세로로 배열 */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* 버튼 스타일링 */
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2열로 그리드 설정 */
+            gap: 10px; /* 버튼 간격 조절 */
+        }
+
+        .button {
+            padding: 15px 30px; /* 일정한 크기 지정 */
+            border-radius: 10px; /* 라운드 처리 */
+            background-color: gray; /* 회색 배경 */
+            color: white; /* 흰색 글씨 */
+            font-size: 12pt; /* 글씨의 폰트 크기 */
+            cursor: pointer;
+            text-decoration: none; /* 링크 기본 밑줄 제거 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+        <!-- Set AdBrix Web SDK in Lastest Version -->
+<script>!function(e,r){if(void 0!==e&&!e.adbrix){var t={queue:[]},o=(navigator.userAgent.toLowerCase(),r.createElement("script"));o.type="text/javascript",o.async=!0,o.src="//static.adbrix.io/web-sdk/latest/abx-web-sdk.min.js",o.onload=function(){e.adbrix.runQueuedFunctions&&e.adbrix.runQueuedFunctions()};var c=r.getElementsByTagName("script")[0];c.parentNode.insertBefore(o,c);["init","onInitialized","login","getUserId","setAge","setGender","logout","userProperty.get","userProperty.getAll","userProperty.addOrUpdate","userProperty.remove","userProperty.removes","common.signUp","common.invite","common.useCredit","common.purchase","event.send","debug.traceListener","commerceAttr.categories","commerceAttr.product","commerce.viewHome","commerce.categoryView","commerce.productView","commerce.addToCart","commerce.addToWishList","commerce.reviewOrder","commerce.refund","commerce.search","commerce.share","commerce.listView","commerce.cartView","commerce.paymentInfoAdded","game.tutorialComplete","game.characterCreated","game.stageCleared","game.levelAchieved","push.isPushEnabled","push.isPushSupported","push.showPrompt","push.showNativePrompt","push.showLocalNotification","push.getNotificationPermission"].forEach((function(e){var r=e.split("."),o=r.pop();r.reduce((function(e,r){return e[r]=e[r]||{}}),t)[o]=function(){t.queue.push([e,arguments])}})),e.adbrix=t}}(window,document);</script>
+
+<script>
+    window.adbrix.init({
+        appkey: 'VI2snLBXTUig842ofrPxfw',
+        webSecretkey: 'MbYY3qBUIEC5UESCcjyhOQ',
+        
+    // In Web Message 추가 설정
+    inWebMessage: {
+      enable: true,
+      openInNewWindow: true,
+      zIndex: 9999,
+      fetchListener: function(message){
+        console.log('fetch_listener ' + message);
+      },
+      clickListener: function(actionId, actionType, actionArg, isClosed){
+        console.log('click_listener ' + actionId + actionType + actionArg + isClosed);
+      },
+    },
+    });
+</script>
+
+<script type="text/javascript">
+
+    function isAndroidBridgeAvailable() {
+    var result = false;
+    if (window.adbrixBridge) {
+        result = true;
+    }
+    if (!result) {
+        console.log("No Android APIs found.");
+    }
+    return result;
+}
+
+  </script>
+
+</head>
+<body>
+    <h1>Commerce Event</h1> <!-- 2. 버튼 위에 제목을 추가 -->
+
+    <!-- 버튼 12개를 포함하는 컨테이너 -->
+    <div class="button-container">
+        <!-- 첫 번째 열의 버튼 -->
+        <button class="button" onclick="button1()">홈 화면 진입</button>
+        <button class="button" onclick="button2()">카테고리 진입</button>
+        <button class="button" onclick="button3()">상품 상세 보기</button>
+        <button class="button" onclick="button4()">장바구니 담기</button>
+        <button class="button" onclick="button5()">관심 상품추가</button>
+        <button class="button" onclick="button6()">주문 확인하기</button>
+
+        <!-- 두 번째 열의 버튼 -->
+        <button class="button" onclick="button7()">주문 취소하기</button>
+        <button class="button" onclick="button8()">상품 검색하기</button>
+        <button class="button" onclick="button9()">상품 공유하기</button>
+        <button class="button" onclick="button10()">상품 목록 조회하기</button>
+        <button class="button" onclick="button11()">장바구니 조회하기</button>
+        <button class="button" onclick="button12()">결제 정보 입력하기</button>
+    </div>
+
+    <script type="text/javascript">
+        function viewHome() {
+    const param = {
+        method_name: 'viewHome'
+    }
+    adbrix.commerce.viewHome();
+    if (isAndroidBridgeAvailable()) {
+        adbrixBridge.invoke(JSON.stringify(param));
+    }
+    alert('OK: 홈 화면 진입');
+}
+    </script>
+
+    <script>
+        // 주석 추가: 각 버튼에 대한 동작 함수들
+        function button1() {
+            viewHome();
+            //adbrix.commerce.viewHome();
+        }
+        function button2() {
+            var categories = adbrix.commerceAttr.categories('게임', '소셜', '커머스', '여성', '육아');
+            var product = adbrix.commerceAttr.product('product_id', '상품명', 1000, 5, 200, 'KRW', adbrix.commerceAttr.categories('게임', '소셜', '커머스', '여성', '육아'), {'key': 'value'});
+            var products= [];
+            products.push(product);
+            adbrix.commerce.categoryView(categories, products, {'key': 'value'});
+            alert('OK: 카테고리 진입');
+        }
+        function button3() {
+            var product = adbrix.commerceAttr.product('product_id', '상품명', 1000, 5, 200, 'KRW', adbrix.commerceAttr.categories('게임', '소셜', '커머스', '여성', '육아'), {'key': 'value'});
+            adbrix.commerce.productView(product, {'key': 'value'});
+            alert('OK: 상품 상세 보기');
+        }
+        function button4() {
+            var product = adbrix.commerceAttr.product('product_id', '상품명', 1000, 5, 200, 'KRW', adbrix.commerceAttr.categories('게임', '소셜', '커머스', '여성', '육아'), {'key': 'value'});
+            adbrix.commerce.addToCart(product, {'key': 'value'});
+            alert('OK: 장바구니 담기');
+        }
+        function button5() {
+            var product = adbrix.commerceAttr.product('product_id', '상품명', 1000, 5, 200, 'KRW', adbrix.commerceAttr.categories('게임', '소셜', '커머스', '여성', '육아'), {'key': 'value'});
+            adbrix.commerce.addToWishList(product, {'key': 'value'});
+            alert('OK: 관심 상품추가');
+        }
+        function button6() {
+            var product = adbrix.commerceAttr.product('product_id', '상품명', 1000, 5, 200, 'KRW', adbrix.commerceAttr.categories('게임', '소셜', '커머스', '여성', '육아'), {'key': 'value'});
+            var products = [];
+            products.push(product);
+            adbrix.commerce.reviewOrder('orderid_1', products, 10, 20, {'key': 'value'});
+            alert('OK: 주문 확인하기');
+        }
+        function button7() {
+            var product = adbrix.commerceAttr.product('product_id', '상품명', 1000, 5, 200, 'KRW', adbrix.commerceAttr.categories('게임', '소셜', '커머스', '여성', '육아'), {'key': 'value'});
+            var products = [];
+            products.push(product);
+            adbrix.commerce.refund('orderid_1', products, 10, {'key': 'value'});
+            alert('OK: 주문 취소하기');
+        }
+        function button8() {
+            var product = adbrix.commerceAttr.product('product_id', '상품명', 1000, 5, 200, 'KRW', adbrix.commerceAttr.categories('게임', '소셜', '커머스', '여성', '육아'), {'key': 'value'});
+            var products = [];
+            products.push(product);
+            adbrix.commerce.search('keyword', products, {'key': 'value'});
+            alert('OK: 상품 검색하기');
+        }
+        function button9() {
+            var product = adbrix.commerceAttr.product('product_id', '상품명', 1000, 5, 200, 'KRW', adbrix.commerceAttr.categories('게임', '소셜', '커머스', '여성', '육아'), {'key': 'value'});
+            var products = [];
+            products.push(product);
+            adbrix.commerce.share('KakaoTalk', products, {'key': 'value'});
+            alert('OK: 상품 공유하기');
+        }
+        function button10() {
+            var product = adbrix.commerceAttr.product('product_id', '상품명', 1000, 5, 200, 'KRW', adbrix.commerceAttr.categories('게임', '소셜', '커머스', '여성', '육아'), {'key': 'value'});
+            var products = [];
+            products.push(product);
+            adbrix.commerce.listView(products, {'key': 'value'});
+            alert('OK: 상품 목록 조회하기');
+        }
+        function button11() {
+            var product = adbrix.commerceAttr.product('product_id', '상품명', 1000, 5, 200, 'KRW', adbrix.commerceAttr.categories('게임', '소셜', '커머스', '여성', '육아'), {'key': 'value'});
+            var products = [];
+            products.push(product);
+            adbrix.commerce.cartView(products, {'key': 'value'});
+            alert('OK: 장바구니 조회하기');
+        }
+        function button12() {
+            adbrix.commerce.paymentInfoAdded({'key': 'value'});
+            alert('OK: 결제 정보 입력하기');
+        }
+    </script>
+</body>
+</html>
