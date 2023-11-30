@@ -1,0 +1,192 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common API</title>
+    <style>
+        /* 전체 페이지 스타일링 */
+        body {
+            display: flex;
+            flex-direction: column; /* 추가: 컨테이너의 아이템들을 세로로 배열 */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* 버튼 스타일링 */
+        .button {
+            display: inline-block;
+            margin: 10px 0; /* 수정: 버튼 위아래 간격 조절 */
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: gray;
+            color: white;
+            font-size: 12pt;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+
+        <!-- Set AdBrix Web SDK in Lastest Version -->
+<script>!function(e,r){if(void 0!==e&&!e.adbrix){var t={queue:[]},o=(navigator.userAgent.toLowerCase(),r.createElement("script"));o.type="text/javascript",o.async=!0,o.src="//static.adbrix.io/web-sdk/latest/abx-web-sdk.min.js",o.onload=function(){e.adbrix.runQueuedFunctions&&e.adbrix.runQueuedFunctions()};var c=r.getElementsByTagName("script")[0];c.parentNode.insertBefore(o,c);["init","onInitialized","login","getUserId","setAge","setGender","logout","userProperty.get","userProperty.getAll","userProperty.addOrUpdate","userProperty.remove","userProperty.removes","common.signUp","common.invite","common.useCredit","common.purchase","event.send","debug.traceListener","commerceAttr.categories","commerceAttr.product","commerce.viewHome","commerce.categoryView","commerce.productView","commerce.addToCart","commerce.addToWishList","commerce.reviewOrder","commerce.refund","commerce.search","commerce.share","commerce.listView","commerce.cartView","commerce.paymentInfoAdded","game.tutorialComplete","game.characterCreated","game.stageCleared","game.levelAchieved","push.isPushEnabled","push.isPushSupported","push.showPrompt","push.showNativePrompt","push.showLocalNotification","push.getNotificationPermission"].forEach((function(e){var r=e.split("."),o=r.pop();r.reduce((function(e,r){return e[r]=e[r]||{}}),t)[o]=function(){t.queue.push([e,arguments])}})),e.adbrix=t}}(window,document);</script>
+
+<script>
+    window.adbrix.init({
+        appkey: 'VI2snLBXTUig842ofrPxfw',
+        webSecretkey: 'MbYY3qBUIEC5UESCcjyhOQ',
+       
+    // In Web Message 추가 설정
+    inWebMessage: {
+      enable: true,
+      openInNewWindow: true,
+      zIndex: 9999,
+      fetchListener: function(message){
+        console.log('fetch_listener ' + message);
+      },
+      clickListener: function(actionId, actionType, actionArg, isClosed){
+        console.log('click_listener ' + actionId + actionType + actionArg + isClosed);
+      },
+    },
+    });
+</script>
+
+<script type="text/javascript">
+
+    function isAndroidBridgeAvailable() {
+    var result = false;
+    if (window.adbrixBridge) {
+        result = true;
+    }
+    if (!result) {
+        console.log("No Android APIs found.");
+    }
+    return result;
+    }
+
+    function signUp() {
+    const param = {
+        method_name: AdbrixMethodName.signUp,
+        sign_channel: AdbrixSignUpChannel.Google,  // number
+        extra_attr: {
+            user_id: "user_id",
+            age: 14  // number
+        }
+    }
+    adbrix.common.signUp('Google', {
+        user_id: "user_id",
+        age: 14  // number
+     });
+    if (isAndroidBridgeAvailable()) {
+        adbrixBridge.invoke(JSON.stringify(param));
+    }
+    if (isIosBridgeAvailable()) {
+        window.webkit.messageHandlers.adbrixBridge.postMessage(param);
+    }
+}
+        
+      </script>
+
+</head>
+<body>
+    <h1>Common API</h1> <!-- 2. 버튼 위에 제목을 추가 -->
+
+    <!-- 네 개의 버튼 -->
+    <button class="button" onclick="signup()">회원가입</button>
+
+    <script type="text/javascript">
+        function signup(){
+            const param = {
+        method_name: 'signUp',
+        sign_channel: 'Google',  // number
+        extra_attr: {
+            user_id: "user_id",
+            age: 14  // number
+        }
+    }
+    adbrix.common.signUp('Google', {
+        user_id: "user_id",
+        age: 14  // number
+     });
+    if (isAndroidBridgeAvailable()) {
+        adbrixBridge.invoke(JSON.stringify(param));
+    }
+    alert("OK");
+        }
+
+    </script>
+    <!-- <script>
+    // 주석 추가: 회원가입 함수
+    function signup() {
+      adbrix.common.signUp('Google');
+      alert("OK");
+    }  
+    </script> -->
+
+    <button class="button" onclick="invite()">사용자 초대</button>
+    <script>
+    // 주석 추가: 사용자 초대 함수
+    function invite() {
+      adbrix.common.invite('Google', 'your_customer_userid');
+      alert("OK");
+    }  
+    </script>
+
+    <button class="button" onclick="useCredit()">크레딧 사용</button>
+    <script>
+    // 주석 추가: 크레딧 사용 함수
+    function useCredit() {
+      adbrix.common.useCredit(10000);
+      alert("OK");
+    }  
+    </script>
+
+    <button class="button" onclick="purchase()">구매이벤트</button>
+    <script>
+    // 주석 추가: 구매이벤트 함수
+    function purchase() {
+      adbrix.onInitialized(() => {
+        // product category setting
+        var category_1 = adbrix.commerceAttr.categories (
+            'category1', // At least 1 category required
+            'category2',
+            'category3',
+            'category4',
+            'category5'
+        );
+        
+        // product information setting
+        
+        var product_1 = adbrix.commerceAttr.product(
+            'product_ID',   // product_id
+            'prduct_Name',  // product_name
+            20000.00,       // price
+            3,              // quantity
+            1000.00,        // discount
+            'KRW',          // currency
+            category_1,     // category
+            {'size': 36}    // product properties (Optional)
+         );
+         
+         // create product list
+         
+         var productList = [];
+         productList.push(product_1);
+         
+         // purchase API
+         
+         adbrix.common.purchase(
+             'order_id',                 // order_id 
+             productList,                // product_list
+             59000.00,                   // order_sale
+             1500.00,                    // discount
+             2500.00,                    // delivery_charge
+             'CreditCard',               // payment_method
+             {'membertype' : 'VIP'}      // event properties (Optional)
+          );
+      });
+      alert("OK");
+    }  
+    </script>
+</body>
+</html>
