@@ -118,8 +118,8 @@
         method_name: 'viewHome'
     }
     adbrix.commerce.viewHome();
-    if (isAndroidBridgeAvailable()) {
-        adbrixBridge.invoke(JSON.stringify(param));
+    if (isIosBridgeAvailable()) {
+        window.webkit.messageHandlers.adbrixBridge.postMessage(param);
     }
     alert('OK: 홈 화면 진입');
 }

@@ -88,8 +88,9 @@
         user_id: "user_id",
         age: 14  // number
      });
-    if (isAndroidBridgeAvailable()) {
-        adbrixBridge.invoke(JSON.stringify(param));
+     
+     if (isIosBridgeAvailable()) {
+        window.webkit.messageHandlers.adbrixBridge.postMessage(param);
     }
     alert("OK");
         }

@@ -83,10 +83,8 @@ function isIosBridgeAvailable() {
             method_name: 'login',  // 원하는 API명을 입력.
             user_id: userId
         };
+
         adbrix.login(userId);
-        if (isAndroidBridgeAvailable()) {
-            adbrixBridge.invoke(JSON.stringify(param));
-        }
 
         if (isIosBridgeAvailable()) {
         window.webkit.messageHandlers.adbrixBridge.postMessage(param);
@@ -112,9 +110,7 @@ function isIosBridgeAvailable() {
             method_name: 'logout'  // 원하는 API명을 입력.
         }
         adbrix.logout();
-        if (isAndroidBridgeAvailable()) {
-            adbrixBridge.invoke(JSON.stringify(param));
-        }
+        
         if (isIosBridgeAvailable()) {
         window.webkit.messageHandlers.adbrixBridge.postMessage(param);
     }
@@ -147,9 +143,7 @@ function isIosBridgeAvailable() {
             age: age
         }
         adbrix.setAge(age);
-        if (isAndroidBridgeAvailable()) {
-            adbrixBridge.invoke(JSON.stringify(param));
-        }
+       
         if (isIosBridgeAvailable()) {
         window.webkit.messageHandlers.adbrixBridge.postMessage(param);
     }
@@ -163,9 +157,7 @@ function isIosBridgeAvailable() {
             gender: gender
         }
         adbrix.setGender(gender);
-        if (isAndroidBridgeAvailable()) {
-            adbrixBridge.invoke(JSON.stringify(param));
-        }
+        
         if (isIosBridgeAvailable()) {
         window.webkit.messageHandlers.adbrixBridge.postMessage(param);
     }
