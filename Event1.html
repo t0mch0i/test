@@ -1,0 +1,199 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User API</title>
+    <style>
+        /* 전체 페이지 스타일링 */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* 버튼 스타일링 */
+        .button {
+            display: block; /* 블록 요소로 변경하여 수직으로 배열 */
+            margin: 10px auto; /* 가운데 정렬 및 버튼 간격 조절 */
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: gray;
+            color: white;
+            font-size: 12pt;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+
+       <!-- Set AdBrix Web SDK in Lastest Version -->
+<script>!function(e,r){if(void 0!==e&&!e.adbrix){var t={queue:[]},o=(navigator.userAgent.toLowerCase(),r.createElement("script"));o.type="text/javascript",o.async=!0,o.src="//static.adbrix.io/web-sdk/latest/abx-web-sdk.min.js",o.onload=function(){e.adbrix.runQueuedFunctions&&e.adbrix.runQueuedFunctions()};var c=r.getElementsByTagName("script")[0];c.parentNode.insertBefore(o,c);["init","onInitialized","login","getUserId","setAge","setGender","logout","userProperty.get","userProperty.getAll","userProperty.addOrUpdate","userProperty.remove","userProperty.removes","common.signUp","common.invite","common.useCredit","common.purchase","event.send","debug.traceListener","commerceAttr.categories","commerceAttr.product","commerce.viewHome","commerce.categoryView","commerce.productView","commerce.addToCart","commerce.addToWishList","commerce.reviewOrder","commerce.refund","commerce.search","commerce.share","commerce.listView","commerce.cartView","commerce.paymentInfoAdded","game.tutorialComplete","game.characterCreated","game.stageCleared","game.levelAchieved","push.isPushEnabled","push.isPushSupported","push.showPrompt","push.showNativePrompt","push.showLocalNotification","push.getNotificationPermission"].forEach((function(e){var r=e.split("."),o=r.pop();r.reduce((function(e,r){return e[r]=e[r]||{}}),t)[o]=function(){t.queue.push([e,arguments])}})),e.adbrix=t}}(window,document);</script>
+
+<script>
+    window.adbrix.init({
+        appkey: 'VI2snLBXTUig842ofrPxfw',
+        webSecretkey: 'MbYY3qBUIEC5UESCcjyhOQ',
+
+    // In Web Message 추가 설정
+    inWebMessage: {
+      enable: true,
+      openInNewWindow: true,
+      zIndex: 9999,
+      fetchListener: function(message){
+        console.log('fetch_listener ' + message);
+      },
+      clickListener: function(actionId, actionType, actionArg, isClosed){
+        console.log('click_listener ' + actionId + actionType + actionArg + isClosed);
+      },
+    },
+    });
+</script>
+
+<script type="text/javascript">
+
+    function isAndroidBridgeAvailable() {
+    var result = false;
+    if (window.adbrixBridge) {
+        result = true;
+    }
+    if (!result) {
+        console.log("No Android APIs found.");
+    }
+    return result;
+}
+
+  </script>
+
+<script type="text/javascript">
+
+function isIosBridgeAvailable() {
+    var result = false;
+    if (window.webkit
+        && window.webkit.messageHandlers
+        && window.webkit.messageHandlers.adbrixBridge) {
+        result = true;
+    }
+    if (!result) {
+        console.log("No iOS APIs found.");
+    }
+    return result;
+}
+  </script>
+
+</head>
+<body>
+    <!-- 제목 추가 -->
+    <h1>User API</h1>
+
+    <!-- 세 개의 버튼 -->
+    <button class="button" onclick="login()">Login</button>
+    
+    <script type="text/javascript">
+
+    function login() {
+        var userId = "1127";
+        const param = {
+            method_name: 'login',  // 원하는 API명을 입력.
+            user_id: userId
+        };
+        adbrix.login(userId);
+        if (isAndroidBridgeAvailable()) {
+            adbrixBridge.invoke(JSON.stringify(param));
+        }
+
+        if (isIosBridgeAvailable()) {
+        window.webkit.messageHandlers.adbrixBridge.postMessage(param);
+    }
+         alert("OK");
+    }
+    
+      </script>
+    <!-- <script>
+        // Login 함수
+        function Login() {
+            adbrix.login('user_id');
+            alert("OK");
+        }
+    </script> -->
+
+    <button class="button" onclick="logout()">Logout</button>
+
+    <script type="text/javascript">
+
+        function logout() {
+        const param = {
+            method_name: 'logout'  // 원하는 API명을 입력.
+        }
+        adbrix.logout();
+        if (isAndroidBridgeAvailable()) {
+            adbrixBridge.invoke(JSON.stringify(param));
+        }
+        if (isIosBridgeAvailable()) {
+        window.webkit.messageHandlers.adbrixBridge.postMessage(param);
+    }
+         alert("OK");
+    }
+    </script>
+
+    <!-- <script>
+        // Logout 함수
+        function Logout() {
+            adbrix.logout();
+            alert("OK");
+        }
+    </script> -->
+
+    <button class="button" onclick="UserProperty()">UserProperty</button>
+
+    <script type="text/javascript">
+
+        function UserProperty() {
+            setAge();
+            setGender();
+         alert("OK");
+        }
+
+        function setAge(){
+            var age = 30;
+            const param = {
+            method_name: 'setAge',
+            age: age
+        }
+        adbrix.setAge(age);
+        if (isAndroidBridgeAvailable()) {
+            adbrixBridge.invoke(JSON.stringify(param));
+        }
+        if (isIosBridgeAvailable()) {
+        window.webkit.messageHandlers.adbrixBridge.postMessage(param);
+    }
+
+        }
+
+        function setGender(){
+            var gender = 2;
+            const param = {
+            method_name: 'setGender',
+            gender: gender
+        }
+        adbrix.setGender(gender);
+        if (isAndroidBridgeAvailable()) {
+            adbrixBridge.invoke(JSON.stringify(param));
+        }
+        if (isIosBridgeAvailable()) {
+        window.webkit.messageHandlers.adbrixBridge.postMessage(param);
+    }
+        }
+    </script>
+    <!-- <script>
+        // UserProperty 함수
+        function UserProperty() {
+            adbrix.setAge(30);
+            adbrix.setGender(2);
+            adbrix.userProperty.addOrUpdate('email', 'abx@igaworks.com');
+            alert("OK");
+        }
+    </script> -->
+</body>
+</html>
