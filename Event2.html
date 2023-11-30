@@ -1,0 +1,81 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Event</title>
+    <style>
+        /* 전체 페이지 스타일링 */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* 버튼 스타일링 */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .button {
+            padding: 15px 30px;
+            border-radius: 10px;
+            background-color: gray;
+            color: white;
+            font-size: 12pt;
+            cursor: pointer;
+        }
+    </style>
+     <!-- Set AdBrix Web SDK in Lastest Version -->
+<script>!function(e,r){if(void 0!==e&&!e.adbrix){var t={queue:[]},o=(navigator.userAgent.toLowerCase(),r.createElement("script"));o.type="text/javascript",o.async=!0,o.src="//static.adbrix.io/web-sdk/latest/abx-web-sdk.min.js",o.onload=function(){e.adbrix.runQueuedFunctions&&e.adbrix.runQueuedFunctions()};var c=r.getElementsByTagName("script")[0];c.parentNode.insertBefore(o,c);["init","onInitialized","login","getUserId","setAge","setGender","logout","userProperty.get","userProperty.getAll","userProperty.addOrUpdate","userProperty.remove","userProperty.removes","common.signUp","common.invite","common.useCredit","common.purchase","event.send","debug.traceListener","commerceAttr.categories","commerceAttr.product","commerce.viewHome","commerce.categoryView","commerce.productView","commerce.addToCart","commerce.addToWishList","commerce.reviewOrder","commerce.refund","commerce.search","commerce.share","commerce.listView","commerce.cartView","commerce.paymentInfoAdded","game.tutorialComplete","game.characterCreated","game.stageCleared","game.levelAchieved","push.isPushEnabled","push.isPushSupported","push.showPrompt","push.showNativePrompt","push.showLocalNotification","push.getNotificationPermission"].forEach((function(e){var r=e.split("."),o=r.pop();r.reduce((function(e,r){return e[r]=e[r]||{}}),t)[o]=function(){t.queue.push([e,arguments])}})),e.adbrix=t}}(window,document);</script>
+
+<script>
+    window.adbrix.init({
+        appkey: 'VI2snLBXTUig842ofrPxfw',
+        webSecretkey: 'MbYY3qBUIEC5UESCcjyhOQ',
+        
+    // In Web Message 추가 설정
+    inWebMessage: {
+      enable: true,
+      openInNewWindow: true,
+      zIndex: 9999,
+      fetchListener: function(message){
+        console.log('fetch_listener ' + message);
+      },
+      clickListener: function(actionId, actionType, actionArg, isClosed){
+        console.log('click_listener ' + actionId + actionType + actionArg + isClosed);
+      },
+    },
+    });
+</script>
+</head>
+<body>
+    <h1>Custom Event</h1>
+
+    <!-- 버튼 2개를 포함하는 컨테이너 -->
+    <div class="button-container">
+        <!-- 버튼 2개 -->
+        <button class="button" onclick="Button1()">버튼 1</button>
+        <button class="button" onclick="Button2()">버튼 2</button>
+    </div>
+
+    <script>
+        // 주석 추가: 각 버튼에 대한 클릭 이벤트 처리
+        function Button1() {
+
+            adbrix.event.send('Custom_Button_1', {'Button_1': '1234567890'})
+
+            alert('버튼 1 클릭 - 알람');
+        }
+
+        function Button2() {
+            
+            alert('버튼 2 클릭 - 알람');
+        }
+    </script>
+</body>
+</html>
