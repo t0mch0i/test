@@ -1,0 +1,104 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Event</title>
+    <style>
+        /* 전체 페이지 스타일링 */
+        body {
+            display: flex;
+            flex-direction: column; /* 추가: 컨테이너의 아이템들을 세로로 배열 */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* 버튼 스타일링 */
+        .button-container {
+            display: flex;
+            flex-direction: column; /* 추가: 버튼들을 수직으로 배열 */
+            gap: 10px; /* 버튼 간격 조절 */
+        }
+
+        .button {
+            padding: 15px 30px; /* 일정한 크기 지정 */
+            border-radius: 10px; /* 라운드 처리 */
+            background-color: gray; /* 회색 배경 */
+            color: white; /* 흰색 글씨 */
+            font-size: 12pt; /* 글씨의 폰트 크기 */
+            cursor: pointer;
+        }
+    </style>
+      <!-- Set AdBrix Web SDK in Lastest Version -->
+<script>!function(e,r){if(void 0!==e&&!e.adbrix){var t={queue:[]},o=(navigator.userAgent.toLowerCase(),r.createElement("script"));o.type="text/javascript",o.async=!0,o.src="//static.adbrix.io/web-sdk/latest/abx-web-sdk.min.js",o.onload=function(){e.adbrix.runQueuedFunctions&&e.adbrix.runQueuedFunctions()};var c=r.getElementsByTagName("script")[0];c.parentNode.insertBefore(o,c);["init","onInitialized","login","getUserId","setAge","setGender","logout","userProperty.get","userProperty.getAll","userProperty.addOrUpdate","userProperty.remove","userProperty.removes","common.signUp","common.invite","common.useCredit","common.purchase","event.send","debug.traceListener","commerceAttr.categories","commerceAttr.product","commerce.viewHome","commerce.categoryView","commerce.productView","commerce.addToCart","commerce.addToWishList","commerce.reviewOrder","commerce.refund","commerce.search","commerce.share","commerce.listView","commerce.cartView","commerce.paymentInfoAdded","game.tutorialComplete","game.characterCreated","game.stageCleared","game.levelAchieved","push.isPushEnabled","push.isPushSupported","push.showPrompt","push.showNativePrompt","push.showLocalNotification","push.getNotificationPermission"].forEach((function(e){var r=e.split("."),o=r.pop();r.reduce((function(e,r){return e[r]=e[r]||{}}),t)[o]=function(){t.queue.push([e,arguments])}})),e.adbrix=t}}(window,document);</script>
+
+<script>
+    window.adbrix.init({
+        appkey: 'VI2snLBXTUig842ofrPxfw',
+        webSecretkey: 'MbYY3qBUIEC5UESCcjyhOQ',
+        // push 관련 설정 추가
+    push: {
+      enable: true,
+      serviceWorkerOptions: {
+        file_name: 'service-worker.js',
+        file_path: '/',
+        scope: '/'
+      },
+    },
+    // In Web Message 추가 설정
+    inWebMessage: {
+      enable: true,
+      openInNewWindow: true,
+      zIndex: 9999,
+      fetchListener: function(message){
+        console.log('fetch_listener ' + message);
+      },
+      clickListener: function(actionId, actionType, actionArg, isClosed){
+        console.log('click_listener ' + actionId + actionType + actionArg + isClosed);
+      },
+    },
+    });
+</script>
+
+</head>
+<body>
+    <h1>Game Event</h1> <!-- 2. 버튼 위에 제목을 추가 -->
+
+    <!-- 버튼 4개를 포함하는 컨테이너 -->
+    <div class="button-container">
+        <!-- 버튼 4개 -->
+        <button class="button" onclick="Button1()">튜토리얼 완료</button>
+        <button class="button" onclick="Button2()">캐릭터 생성</button>
+        <button class="button" onclick="Button3()">스테이지 완료</button>
+        <button class="button" onclick="Button4()">레벨 달성</button>
+    </div>
+
+    <script>
+        // 주석 추가: 각 버튼에 대한 클릭 이벤트 처리
+        function Button1() {
+            const gameAttr = { 'grade': 'vip', 'howmany_buy': 36, 'discoint': true };
+            adbrix.game.tutorialComplete(true, gameAttr);
+            alert('튜토리얼 완료 OK');
+        }
+
+        function Button2() {
+            const gameAttr = { 'grade': 'vip', 'howmany_buy': 36, 'discoint': true };
+            adbrix.game.characterCreated(gameAttr);
+            alert('캐릭터 생성 OK');
+        }
+
+        function Button3() {
+            const gameAttr = { 'grade': 'vip', 'howmany_buy': 36, 'discoint': true };
+            adbrix.game.stageCleared('1-5', gameAttr);
+            alert('스테이지 완료 OK');
+        }
+
+        function Button4() {
+            const gameAttr = { 'grade': 'vip', 'howmany_buy': 36, 'discoint': true };
+            adbrix.game.levelAchieved(1, gameAttr);
+            alert('레벨 달성 OK');
+        }
+    </script>
+</body>
+</html>
