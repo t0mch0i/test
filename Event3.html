@@ -70,10 +70,6 @@
 </head>
 <body>
     <h1>Common API</h1> <!-- 2. 버튼 위에 제목을 추가 -->
-
-
-
-
     
     <!-- 네 개의 버튼 -->
     <button class="button" onclick="signup()">회원가입</button>
@@ -83,15 +79,17 @@
             const param = {
         method_name: 'signUp',
         sign_channel: 'Google',  // number
-        extra_attr: {
+        sign_up_properties: {
             user_id: "user_id",
+            gender: 2,
             age: 14  // number
         }
     }
-    // adbrix.common.signUp('Google', {
-    //     user_id: "user_id",
-    //     age: 14  // number
-    // //  });
+    adbrix.common.signUp('Google', {
+        user_id: "user_id",
+        gender: 2,
+        age: 14  // number
+     });
      
      if (isIosBridgeAvailable()) {
         console.log("iOS Bridge");
