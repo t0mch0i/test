@@ -167,11 +167,10 @@
             }
         };
     
-        if (isAndroidBridgeAvailable()) {
-            adbrixBridge.invoke(JSON.stringify(param));
-        }
+
         if (isIosBridgeAvailable()) {
             window.webkit.messageHandlers.adbrixBridge.postMessage(param);
+            console.log("회원가입");
         }
         
         }
