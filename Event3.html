@@ -100,15 +100,15 @@
     <h1>Common API</h1> <!-- 2. 버튼 위에 제목을 추가 -->
     
     <!-- 네 개의 버튼 -->
-    <!-- <button class="button" onclick="signup()">회원가입</button>
+    <button class="button" onclick="signup()">회원가입</button>
 
     <script type="text/javascript">
         function signup(){
             const param = {
-        method_name: 'signUp',
+        method_name: AdbrixMethodName.signUp,
         sign_channel: AdbrixSignUpChannel.AdBrixRmSignUpGoogleChannel,  // number
         sign_up_properties: {
-            user_id: "user_id",
+            user_id: "ios_test",
             gender: 1,
             age: 14  // number
         }
@@ -120,48 +120,17 @@
      });
      
      if (isIosBridgeAvailable()) {
-        console.log("iOS Bridge");
         window.webkit.messageHandlers.adbrixBridge.postMessage(param);
-        console.log(param);
+
 
     }
-    alert("OK");
-        }
-
-    </script> -->
-    <!-- method name -->
-<!-- <script>
-    const AdbrixMethodName = {
-        login: "login",
-        logout: "logout",
-        signUp: "signUp",
-        purchase: "purchase",
-        viewHome: "viewHome"
+    // alert("OK");
     }
-    
-    </script> -->
-    
-    
-    <!--SignUp Channel-->
-    <!-- <script>
-    const AdbrixSignUpChannel = {
-        AdBrixRmSignUpKakaoChannel: 1,
-        AdBrixRmSignUpNaverChannel: 2,
-        AdBrixRmSignUpLineChannel: 3,
-        AdBrixRmSignUpGoogleChannel: 4,
-        AdBrixRmSignUpFacebookChannel: 5,
-        AdBrixRmSignUpTwitterChannel: 6,
-        AdBrixRmSignUpWhatsAppChannel: 7,
-        AdBrixRmSignUpQQChannel: 8,
-        AdBrixRmSignUpWeChatChannel: 9,
-        AdBrixRmSignUpUserIdChannel: 10,
-        AdBrixRmSignUpETCChannel: 11,
-        AdBrixRmSignUpSkTidChannel: 12,
-        AdBrixRmSignUpAppleIdChannel: 13
-    };
-    </script> -->
+
+    </script>
+
     <!-- 회원가입 -->
-    <button onclick="signUp()"> 회원가입 </button>
+    <!-- <button onclick="signUp()"> 회원가입 </button>
         <script type="text/javascript">
         function signUp(){
             console.log("회원가입 이벤트");
@@ -191,7 +160,7 @@
       adbrix.common.signUp('Google');
       alert("OK");
     }  
-</script>
+</script> -->
 
     <button class="button" onclick="invite()">사용자 초대</button>
     <script>
