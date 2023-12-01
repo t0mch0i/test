@@ -66,6 +66,24 @@
         return result;
     }
       </script>
+
+    <script type="text/javascript">
+        const AdbrixSignUpChannel = {
+    AdBrixRmSignUpKakaoChannel: 1,
+    AdBrixRmSignUpNaverChannel: 2,
+    AdBrixRmSignUpLineChannel: 3,
+    AdBrixRmSignUpGoogleChannel: 4,
+    AdBrixRmSignUpFacebookChannel: 5,
+    AdBrixRmSignUpTwitterChannel: 6,
+    AdBrixRmSignUpWhatsAppChannel: 7,
+    AdBrixRmSignUpQQChannel: 8,
+    AdBrixRmSignUpWeChatChannel: 9,
+    AdBrixRmSignUpUserIdChannel: 10,
+    AdBrixRmSignUpETCChannel: 11,
+    AdBrixRmSignUpSkTidChannel: 12,
+    AdBrixRmSignUpAppleIdChannel: 13
+};
+    </script>
     
 </head>
 <body>
@@ -78,11 +96,11 @@
         function signup(){
             const param = {
         method_name: 'signUp',
-        sign_channel: 'Google',  // number
+        sign_channel: AdbrixSignUpChannel.AdBrixRmSignUpGoogleChannel,  // number
         sign_up_properties: {
             user_id: "user_id",
-            gender: "gender",
-            age: "age"  // number
+            gender: 1,
+            age: 14  // number
         }
     }
     adbrix.common.signUp('Google', {
@@ -100,14 +118,14 @@
     alert("OK");
         }
 
-    </script>
+    </scrip>
     <!-- <script>
     // 주석 추가: 회원가입 함수
     function signup() {
       adbrix.common.signUp('Google');
       alert("OK");
     }  
-    </script> -->
+    </> -->
 
     <button class="button" onclick="invite()">사용자 초대</button>
     <script>
