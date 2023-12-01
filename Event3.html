@@ -67,7 +67,7 @@
     }
       </script>
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         const AdbrixSignUpChannel = {
     AdBrixRmSignUpKakaoChannel: 1,
     AdBrixRmSignUpNaverChannel: 2,
@@ -83,14 +83,14 @@
     AdBrixRmSignUpSkTidChannel: 12,
     AdBrixRmSignUpAppleIdChannel: 13
 };
-    </script>
+    </script> -->
     
 </head>
 <body>
     <h1>Common API</h1> <!-- 2. 버튼 위에 제목을 추가 -->
     
     <!-- 네 개의 버튼 -->
-    <button class="button" onclick="signup()">회원가입</button>
+    <!-- <button class="button" onclick="signup()">회원가입</button>
 
     <script type="text/javascript">
         function signup(){
@@ -118,14 +118,71 @@
     alert("OK");
         }
 
-    </scrip>
-    <!-- <script>
+    </script> -->
+    <!-- method name -->
+<script>
+    const AdbrixMethodName = {
+        login: "login",
+        logout: "logout",
+        signUp: "signUp",
+        purchase: "purchase",
+        viewHome: "viewHome"
+    }
+    
+    </script>
+    
+    
+    <!--SignUp Channel-->
+    <script>
+    const AdbrixSignUpChannel = {
+        AdBrixRmSignUpKakaoChannel: 1,
+        AdBrixRmSignUpNaverChannel: 2,
+        AdBrixRmSignUpLineChannel: 3,
+        AdBrixRmSignUpGoogleChannel: 4,
+        AdBrixRmSignUpFacebookChannel: 5,
+        AdBrixRmSignUpTwitterChannel: 6,
+        AdBrixRmSignUpWhatsAppChannel: 7,
+        AdBrixRmSignUpQQChannel: 8,
+        AdBrixRmSignUpWeChatChannel: 9,
+        AdBrixRmSignUpUserIdChannel: 10,
+        AdBrixRmSignUpETCChannel: 11,
+        AdBrixRmSignUpSkTidChannel: 12,
+        AdBrixRmSignUpAppleIdChannel: 13
+    };
+    </script>
+    <!-- 회원가입 -->
+    <button onclick="signUp()"> 회원가입 </button>
+        <script type="text/javascript">
+        function signUp(){
+            console.log("회원가입 이벤트");
+            const param = {
+            method_name : AdbrixMethodName.signUp,  // 원하는 API명을 입력.
+            sign_channel : AdbrixSignUpChannel.AdBrixRmSignUpKakaoChannel,
+            sign_up_properties : {
+                user_id : "1201_test222",
+                age : 14,
+                //gender : AdbrixGenderType.Male
+                gender : 1
+              
+            }
+        };
+    
+        if (isAndroidBridgeAvailable()) {
+            adbrixBridge.invoke(JSON.stringify(param));
+        }
+        if (isIosBridgeAvailable()) {
+            window.webkit.messageHandlers.adbrixBridge.postMessage(param);
+        }
+        
+        }
+        </script>
+    <script>
     // 주석 추가: 회원가입 함수
     function signup() {
       adbrix.common.signUp('Google');
       alert("OK");
     }  
-    </> -->
+</script>
 
     <button class="button" onclick="invite()">사용자 초대</button>
     <script>
