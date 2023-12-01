@@ -90,7 +90,9 @@
      });
      
      if (isIosBridgeAvailable()) {
+        console.log("iOS Bridge");
         window.webkit.messageHandlers.adbrixBridge.postMessage(param);
+
     }
     alert("OK");
         }
